@@ -11,6 +11,8 @@ public class PersonUtils {
         personCount++;
         persons[1] = new Person(2, "xyz", 13);
         personCount++;
+        persons[2] = new Person(3, "pqr", 22);
+        personCount++;
     }
     public Person[] getAllPerson(){
         return persons;

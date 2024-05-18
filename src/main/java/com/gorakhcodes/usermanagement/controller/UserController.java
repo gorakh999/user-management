@@ -32,4 +32,9 @@ public class UserController {
         return personService.savePerson(person);
     }
 
+    @PutMapping("/persons")
+    public Person updatePerson(@RequestBody Person person){
+        return personService.savePerson(person);
+    }
+
 }
