@@ -50,4 +50,23 @@ public class PersonUtils {
         }
         return -1;
     }
+    public int isExist(int id){
+        for(int i = 0; i < personCount; i++){
+            if (persons[i].getId() == id){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public String delete(int id){
+        int index = isExist(id);
+        if (index != -1){
+            for(int i = index; i < personCount - 1; i++){
+                persons[i] = persons[i+1];
+            }
+            personCount--;
+            return "Person Deleted Successfully.";
+        }
+        return "Person Not Found.";
+    }
 }

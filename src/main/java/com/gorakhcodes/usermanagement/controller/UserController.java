@@ -37,4 +37,9 @@ public class UserController {
         return personService.savePerson(person);
     }
 
+    @DeleteMapping("/persons/{id}")
+    public String deletePerson(@PathVariable int id){
+        return personService.deletePerson(id);
+    }
+
 }

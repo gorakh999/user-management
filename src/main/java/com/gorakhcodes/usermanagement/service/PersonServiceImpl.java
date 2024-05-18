@@ -19,6 +19,11 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
+    public String deletePerson(int id) {
+        return personDao.delete(id);
+    }
+
+    @Override
     public Person[] findAllPersons() {
         return personDao.getAllPersons();
     }

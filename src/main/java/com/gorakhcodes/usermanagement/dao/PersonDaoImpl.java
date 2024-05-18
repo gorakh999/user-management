@@ -24,6 +24,11 @@ public class PersonDaoImpl implements  PersonDao{
     }
 
     @Override
+    public String delete(int id) {
+        return personUtils.delete(id);
+    }
+
+    @Override
     public Person[] getAllPersons() {
         Person [] result = personUtils.getAllPerson();
         Person [] persons = new Person[PersonUtils.personCount];
