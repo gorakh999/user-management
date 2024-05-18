@@ -16,6 +16,11 @@ public class PersonUtils {
         return persons;
     }
     public Person save(Person person){
+        int personExist = isExist(person);
+        if (personExist != -1){
+            persons[personExist] = person;
+            return person;
+        }
         if (personCount < persons.length){
             persons[personCount] = person;
             personCount++;
@@ -34,5 +39,13 @@ public class PersonUtils {
         }
 
         return person;
+    }
+    public int isExist(Person person){
+        for(int i = 0; i < personCount; i++){
+            if (persons[i].getId() == person.getId()){
+                return i;
+            }
+        }
+        return -1;
     }
 }
