@@ -4,6 +4,8 @@ import com.gorakhcodes.usermanagement.dao.PersonDao;
 import com.gorakhcodes.usermanagement.dao.PersonDaoImpl;
 import com.gorakhcodes.usermanagement.model.Person;
 
+import java.util.List;
+
 public class PersonServiceImpl implements PersonService{
 
     PersonDao personDao = new PersonDaoImpl();
@@ -24,7 +26,7 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public Person[] findAllPersons() {
+    public List<Person> findAllPersons() {
         return personDao.getAllPersons();
     }
 }

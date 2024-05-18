@@ -5,6 +5,8 @@ import com.gorakhcodes.usermanagement.service.PersonService;
 import com.gorakhcodes.usermanagement.service.PersonServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 
@@ -23,7 +25,7 @@ public class UserController {
         return personService.findPerson(id);
     }
     @GetMapping("/persons")
-    public Person[] getAllPersons(){
+    public List<Person> getAllPersons(){
         return personService.findAllPersons();
     }
 

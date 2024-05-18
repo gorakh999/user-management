@@ -3,16 +3,17 @@ package com.gorakhcodes.usermanagement.dao;
 import com.gorakhcodes.usermanagement.model.Person;
 import com.gorakhcodes.usermanagement.utils.PersonUtils;
 
+import java.util.List;
+
 
 public class PersonDaoImpl implements  PersonDao{
     PersonUtils personUtils=  new PersonUtils();
     @Override
     public Person getById(int id) {
-        int arraySize = PersonUtils.personCount;
-        Person [] persons = personUtils.getAllPerson();
-        for(int i = 0; i < arraySize; i++){
-            if (persons[i].getId() == id){
-                return persons[i];
+        List<Person> persons = personUtils.getAllPerson();
+        for (Person person : persons) {
+            if (person.getId() == id) {
+                return person;
             }
         }
         return null;
@@ -29,12 +30,7 @@ public class PersonDaoImpl implements  PersonDao{
     }
 
     @Override
-    public Person[] getAllPersons() {
-        Person [] result = personUtils.getAllPerson();
-        Person [] persons = new Person[PersonUtils.personCount];
-        for(int i = 0; i < PersonUtils.personCount; i++){
-            persons[i] = result[i];
-        }
-        return persons;
+    public List<Person> getAllPersons() {
+        return personUtils.getAllPerson();
     }
 }

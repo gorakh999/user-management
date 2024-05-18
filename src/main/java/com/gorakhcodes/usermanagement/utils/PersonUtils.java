@@ -2,69 +2,47 @@ package com.gorakhcodes.usermanagement.utils;
 
 import com.gorakhcodes.usermanagement.model.Person;
 
-public class PersonUtils {
-    Person [] persons = new Person[5];
-    public static int personCount = 0;
+import java.util.ArrayList;
+import java.util.List;
 
-    public PersonUtils(){
-        persons[0] = new Person(1, "Abc", 24);
-        personCount++;
-        persons[1] = new Person(2, "xyz", 13);
-        personCount++;
-        persons[2] = new Person(3, "pqr", 22);
-        personCount++;
+public class PersonUtils {
+    List<Person> persons = new ArrayList<Person>();
+
+    public PersonUtils() {
+        persons.add(new Person(1, "Abc", 24));
+        persons.add(new Person(2, "xyz", 13));
+        persons.add(new Person(3, "pqr", 22));
     }
-    public Person[] getAllPerson(){
+
+    public List<Person> getAllPerson() {
         return persons;
     }
-    public Person save(Person person){
-        int personExist = isExist(person);
+
+    public Person save(Person person) {
+        int personExist = isExist(person.getId());
         if (personExist != -1){
-            persons[personExist] = person;
+            persons.remove(personExist);
+            persons.add(personExist, person);
             return person;
         }
-        if (personCount < persons.length){
-            persons[personCount] = person;
-            personCount++;
-        }
-        else{
-            Person [] newPersons = new Person[persons.length * 2];
-            int newPersonCount = 0;
-            while(newPersonCount < personCount){
-                newPersons[newPersonCount] = persons[newPersonCount];
-                newPersonCount++;
-            }
-            persons = newPersons;
-            personCount = newPersonCount;
-            persons[personCount] = person;
-            personCount++;
-        }
-
+        persons.add(person);
         return person;
+
     }
-    public int isExist(Person person){
-        for(int i = 0; i < personCount; i++){
-            if (persons[i].getId() == person.getId()){
+
+    public int isExist(int id) {
+        for(int i = 0; i < persons.size(); i++){
+            if (persons.get(i).getId() == id){
                 return i;
             }
         }
         return -1;
     }
-    public int isExist(int id){
-        for(int i = 0; i < personCount; i++){
-            if (persons[i].getId() == id){
-                return i;
-            }
-        }
-        return -1;
-    }
-    public String delete(int id){
+
+    public String delete(int id) {
         int index = isExist(id);
-        if (index != -1){
-            for(int i = index; i < personCount - 1; i++){
-                persons[i] = persons[i+1];
-            }
-            personCount--;
+        if (index != -1) {
+            persons.remove(index);
             return "Person Deleted Successfully.";
         }
         return "Person Not Found.";
