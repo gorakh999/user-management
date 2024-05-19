@@ -1,13 +1,18 @@
 package com.gorakhcodes.usermanagement.model;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 
+@Entity
 public class Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+
     private int age;
-//    private Date dateOfBirth;
+    private String name;
 
     public int getId() {
         return id;
@@ -33,19 +38,10 @@ public class Person {
         this.age = age;
     }
 
-//    public Date getDateOfBirth() {
-//        return dateOfBirth;
-//    }
-//
-//    public void setDateOfBirth(Date dateOfBirth) {
-//        this.dateOfBirth = dateOfBirth;
-//    }
-
     public Person(int id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
-//        this.dateOfBirth = dateOfBirth;
     }
 
     public Person() {
@@ -57,7 +53,6 @@ public class Person {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-//                ", dateOfBirth=" + dateOfBirth +
                 '}';
     }
 }

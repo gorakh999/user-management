@@ -1,18 +1,23 @@
 package com.gorakhcodes.usermanagement.service;
 
 import com.gorakhcodes.usermanagement.dao.PersonDao;
-import com.gorakhcodes.usermanagement.dao.PersonDaoImpl;
+import com.gorakhcodes.usermanagement.exceptions.PersonNotFoundException;
 import com.gorakhcodes.usermanagement.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-public class PersonServiceImpl implements PersonService{
+@Service
+public class PersonServiceImpl implements PersonService {
 
-    PersonDao personDao = new PersonDaoImpl();
+    @Autowired
+    private PersonDao personDao;
 
     @Override
-    public Person findPerson(int id) {
-        return personDao.getById(id);
+    public Person findPerson(int id) throws PersonNotFoundException {
+        return personDao.findById(id).orElseThrow(() -> new PersonNotFoundException("Person Not Found for id: " + id));
     }
 
     @Override
@@ -21,12 +26,17 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public String deletePerson(int id) {
-        return personDao.delete(id);
+    public Person deletePerson(int id) throws PersonNotFoundException {
+        Person person = personDao.findById(id).orElseThrow(
+                () -> new PersonNotFoundException("Person Not Found for id: " + id));
+        if (person != null){
+            personDao.delete(person);
+        }
+        return person;
     }
 
     @Override
-    public List<Person> findAllPersons() {
-        return personDao.getAllPersons();
+    public Optional<List<Person>> findAllPersons() {
+        return Optional.of(personDao.findAll());
     }
 }
