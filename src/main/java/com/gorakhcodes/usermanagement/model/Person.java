@@ -1,14 +1,14 @@
 package com.gorakhcodes.usermanagement.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Entity
+@Document(collection = "user_details")
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private int age;
